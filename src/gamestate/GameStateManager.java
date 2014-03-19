@@ -4,6 +4,7 @@ import main.GamePanel;
 
 public class GameStateManager {
 
+	
 	private final GameState[] gameStates;
 	private int currentState;
 
