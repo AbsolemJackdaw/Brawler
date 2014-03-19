@@ -1,6 +1,10 @@
 package gamestate;
 
+import java.awt.GraphicsEnvironment;
+
 import main.GamePanel;
+import trivia.Print;
+import content.CustomFont;
 
 public class GameStateManager {
 
@@ -13,13 +17,28 @@ public class GameStateManager {
 	public static final int STARTMENU = 1;
 	public static final int CHARACTERSELECT = 2;
 	public static final int HELP = 3;
-	public static final int GAME = 4;
+	public static final int CHOOSEBG = 4;
+	public static final int GAME = 5;
+
+	public int character;
+
+	public static final int HEART = 0;
+	public static final int BRAIN = 1;
+	public static final int PENIS = 2;
 
 	public GameStateManager() {
 
 		// Music.init();
 
 		gameStates = new GameState[NUMGAMESTATES];
+
+		CustomFont.maximilien = CustomFont.load("/Fonts/maximilien.TTF");
+		GraphicsEnvironment ge = GraphicsEnvironment
+				.getLocalGraphicsEnvironment();
+		String[] fontFamilies = ge.getAvailableFontFamilyNames();
+		for (String b : fontFamilies) {
+			Print.say(b);
+		}
 
 		currentState = STARTMENU;
 		loadState(currentState);
@@ -42,10 +61,14 @@ public class GameStateManager {
 	private void loadState(int state) {
 		if (state == STARTMENU) {
 			gameStates[state] = new StartMenu(this);
-			// else if (state == LEVEL1STATE)
-			// gameStates[state] = new STATENAME(this);
+		} else if (state == CHARACTERSELECT) {
+			gameStates[state] = new CharacterSelect(this);
 			/* etc etc */
 		}
+	}
+
+	public void setCharacter(int i) {
+		character = i;
 	}
 
 	public void setState(int state) {
