@@ -11,10 +11,11 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+import content.KeyHandler;
+
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 
-	
 	// dimensions
 	public static final int WIDTH = 320;
 	public static final int HEIGHT = 240;
@@ -73,12 +74,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent key) {
-		//KeyHandler.keySet(key.getKeyCode(), true);
+		KeyHandler.keySet(key.getKeyCode(), true);
 	}
 
 	@Override
 	public void keyReleased(KeyEvent key) {
-		//KeyHandler.keySet(key.getKeyCode(), false);
+		KeyHandler.keySet(key.getKeyCode(), false);
 	}
 
 	@Override
@@ -106,8 +107,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			elapsed = System.nanoTime() - start;
 
 			wait = targetTime - (elapsed / 1000000);
-			if (wait < 0)
+			if (wait < 0) {
 				wait = 5;
+			}
 
 			try {
 				Thread.sleep(wait);
@@ -120,7 +122,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	}
 
 	private void update() {
-		//gsm.update();
-		//KeyHandler.update();
+		gsm.update();
+		KeyHandler.update();
 	}
 }

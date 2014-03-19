@@ -4,20 +4,20 @@ import main.GamePanel;
 
 public class GameStateManager {
 
-	
 	private final GameState[] gameStates;
 	private int currentState;
 
-	public static final int NUMGAMESTATES = 4;
+	public static final int NUMGAMESTATES = 5;
 
 	public static final int DEATH = 0;
 	public static final int STARTMENU = 1;
 	public static final int CHARACTERSELECT = 2;
-	public static final int GAME = 3;
+	public static final int HELP = 3;
+	public static final int GAME = 4;
 
 	public GameStateManager() {
 
-		//Music.init();
+		// Music.init();
 
 		gameStates = new GameState[NUMGAMESTATES];
 
@@ -27,9 +27,9 @@ public class GameStateManager {
 	}
 
 	public void draw(java.awt.Graphics2D g) {
-		if (gameStates[currentState] != null)
+		if (gameStates[currentState] != null) {
 			gameStates[currentState].draw(g);
-		else {
+		} else {
 			g.setColor(java.awt.Color.BLACK);
 			g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		}
@@ -40,11 +40,12 @@ public class GameStateManager {
 	}
 
 	private void loadState(int state) {
-	//	if (state == MENUSTATE)
-			//gameStates[state] = new STATENAME(this);
-		//else if (state == LEVEL1STATE)
-			//gameStates[state] = new STATENAME(this);
-		/*etc etc*/
+		if (state == STARTMENU) {
+			gameStates[state] = new StartMenu(this);
+			// else if (state == LEVEL1STATE)
+			// gameStates[state] = new STATENAME(this);
+			/* etc etc */
+		}
 	}
 
 	public void setState(int state) {
@@ -59,8 +60,9 @@ public class GameStateManager {
 
 	public void update() {
 
-		if (gameStates[currentState] != null)
+		if (gameStates[currentState] != null) {
 			gameStates[currentState].update();
+		}
 	}
 
 }
