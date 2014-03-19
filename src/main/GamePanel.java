@@ -116,9 +116,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
-
 		}
-
 	}
 
 	private void update() {

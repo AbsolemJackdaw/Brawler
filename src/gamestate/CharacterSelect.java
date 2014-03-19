@@ -42,7 +42,7 @@ public class CharacterSelect extends GameState {
 			titleFont = new Font("Maximilien", Font.PLAIN, 28);
 
 			maximilien = new Font("Maximilien", Font.PLAIN, 15);
-			
+
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
