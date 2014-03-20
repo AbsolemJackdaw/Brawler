@@ -17,6 +17,13 @@ public class Images {
 	public static BufferedImage Heart = loadSingle("/Characters/Heart.png");
 	public static BufferedImage Brain = loadSingle("/Characters/Brain.png");
 
+	public static BufferedImage ButtonLong1 = loadSingle("/Buttons/VBox_2.png");
+	public static BufferedImage ButtonLong2 = loadSingle("/Buttons/VlBox_2.png");
+	public static BufferedImage Button1 = loadSingle("/Buttons/VBox_1.png");
+	public static BufferedImage Button2= loadSingle("/Buttons/VlBox_1.png");
+
+	public static BufferedImage hud= loadSingle("/hud/hud.png");
+
 	public static BufferedImage[] load(String s, int x, int y, int subImages) {
 		BufferedImage[] ret;
 		try {

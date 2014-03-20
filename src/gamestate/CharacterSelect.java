@@ -57,7 +57,7 @@ public class CharacterSelect extends GameState {
 		// draw bg
 		bg.draw(g);
 
-		// draw title
+		/*=====DRAW TITLE(S)=====*/
 		g.setFont(titleFont);
 
 		g.setColor(Color.BLACK);
@@ -74,22 +74,26 @@ public class CharacterSelect extends GameState {
 		g.setColor(Color.ORANGE);
 		g.drawString("Choose your character", 100, 47);
 
+		g.drawImage(Images.Button2, 25+(currentChoice*dist), 135+xVx, null);
+		g.drawImage(Images.Button1, 25, 135+xVx, null);		
+		g.drawImage(Images.Button1, 175, 135+xVx, null);
+
+		/*=====DRAWING ICONS=====*/
 		g.drawImage(Images.Heart, 65, 90, null);
 		g.drawImage(Images.Brain, 65 + dist, 90, null);
 
 		final Color clr = new Color(0.5f, 0f, 0.1f);
-		// Draw menu square
+		/*=====SELECT SQUARE(S)=====*/
 		final Rectangle rect = new Rectangle(((GamePanel.WIDTH / 2) - 110)
 				+ (currentChoice * dist), 150 + xVx, 80, 16);
 		Rectangle selectRect = new Rectangle(((GamePanel.WIDTH / 2) - 120)
 				+ (currentChoice * dist), 40 + xVx, 100, 100);
-
 		g.setColor(clr);
 		g.draw(rect);
-		// g.setColor(clr);
 		g.draw(selectRect);
 
-		// draw menu options
+		
+		/*=====DRAW OPTIONS=====*/
 		g.setFont(font);
 		for (int i = 0; i < 2; i++) {
 			if (i == currentChoice) {

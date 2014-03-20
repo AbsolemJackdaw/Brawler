@@ -11,7 +11,7 @@ public class GameStateManager {
 	private final GameState[] gameStates;
 	private int currentState;
 
-	public static final int NUMGAMESTATES = 5;
+	public static final int NUMGAMESTATES = 6;
 
 	public static final int DEATH = 0;
 	public static final int STARTMENU = 1;

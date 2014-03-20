@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 
 import main.GamePanel;
 import content.Background;
+import content.Images;
 import content.KeyHandler;
 
 public class StartMenu extends GameState {
@@ -21,6 +22,8 @@ public class StartMenu extends GameState {
 
 	private Font maximilien;
 
+	int image=0;
+	
 	public StartMenu(GameStateManager gsm) {
 		this.gsm = gsm;
 
@@ -52,14 +55,20 @@ public class StartMenu extends GameState {
 
 		g.setColor(titleColor);
 		g.drawString("Brawler Game", 75, 30);
-
+		
+		g.drawImage(Images.Button1, 95, 90, null);
+		g.drawImage(Images.Button1, 95, 130, null);
+		g.drawImage(Images.Button1, 95, 165, null);
+		
 		final Color clr = new Color(0.5f, 0f, 0.1f);
 		// Draw menu square
 		final Rectangle rect = new Rectangle((GamePanel.WIDTH / 2) - 20,
-				125 + (currentChoice * 20), 46, 18);
+				105 + (currentChoice * 35), 46, 18);
 
 		g.setColor(clr);
 		g.draw(rect);
+
+		
 
 		// draw menu options
 		g.setFont(maximilien);
@@ -69,7 +78,7 @@ public class StartMenu extends GameState {
 			} else {
 				g.setColor(Color.WHITE);
 			}
-			g.drawString(options[i], 145, 140 + (i * 20));
+			g.drawString(options[i], 145, 120 + (i * 35));
 		}
 	}
 

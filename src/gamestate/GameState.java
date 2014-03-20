@@ -1,6 +1,10 @@
 package gamestate;
 
+import content.Background;
+
 public abstract class GameState {
+
+	public Background bg;
 
 	public GameStateManager gsm;
 
