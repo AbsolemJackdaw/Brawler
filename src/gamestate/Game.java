@@ -16,6 +16,8 @@ public class Game extends GameState {
 	Player p;
 	Oponent op;
 
+	int aerialCombo =0;
+	
 	private Font maximilien;
 
 	private String endResult = "";
@@ -114,6 +116,11 @@ public class Game extends GameState {
 		p.setLeft(KeyHandler.keyState[KeyHandler.LEFT]);
 		p.setRight(KeyHandler.keyState[KeyHandler.RIGHT]);
 		p.setJumping(KeyHandler.keyState[KeyHandler.UP]);
+		
+		if(KeyHandler.isPressed(KeyHandler.UP)){
+			aerialCombo =1;
+		}
+		
 		if (KeyHandler.isPressed(KeyHandler.SPACE)) {
 			p.setAttacking();
 		}

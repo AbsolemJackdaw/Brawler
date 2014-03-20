@@ -60,7 +60,7 @@ public class Oponent extends Entity {
 		cwidth += 30;
 		if (this.intersects(getWorld().getPlayer())) {
 			follows = false;
-			if (i < ((getWorld().getDiff() * 2) + 1)) {
+			if (i < ((getWorld().getDiff() * 2) + 5)) {
 				cwidth = 30;
 				attack();
 			}
@@ -79,6 +79,7 @@ public class Oponent extends Entity {
 		if (this.intersects(getWorld().getPlayer())) {
 			attacking = true;
 			getWorld().getPlayer().damageEntity(10);
+			for (int i = 0; i < 10; i++)
 			getWorld().getPlayer().backOff(this);
 		}
 		cwidth -= 20;
