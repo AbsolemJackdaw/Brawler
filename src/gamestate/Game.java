@@ -137,6 +137,7 @@ public class Game extends GameState {
 	private void freeze(){
 		p.setLeft(false);
 		p.setRight(false);
+		
 		op.setLeft(false);
 		op.setRight(false);
 	}

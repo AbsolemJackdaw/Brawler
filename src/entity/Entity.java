@@ -62,14 +62,14 @@ public class Entity {
 	public static boolean showBox = false;
 
 	public int health;
-	public int maxHealth;
 
+	public boolean death;
+	
 	public GameState world;
 
 	// constructor
 	public Entity() {
 		health = 150;
-		maxHealth = 150;
 	}
 
 	public void calculateCorners(double x, double y) {

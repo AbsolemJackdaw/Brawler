@@ -52,8 +52,7 @@ public class Player extends Entity {
 
 		facingRight = true;
 
-		maxHealth = 150;
-		health = maxHealth;
+		health = 150;
 
 	}
 

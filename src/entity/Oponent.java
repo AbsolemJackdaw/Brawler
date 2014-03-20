@@ -49,8 +49,7 @@ public class Oponent extends Entity {
 
 		facingRight = true;
 
-		maxHealth = 150;
-		health = maxHealth;
+		health = 150;
 
 	}
 
@@ -60,12 +59,12 @@ public class Oponent extends Entity {
 		int i = rand.nextInt(100);
 
 
-//		if(i < 20){
-//			backOff();
-//			backOff();
-//			backOff();
-//		}
-		 if (i > 90)
+		if(i < 1){
+			backOff();
+			backOff();
+			backOff();
+		}
+		if (i > 95)
 			attack();
 
 		else{
@@ -86,9 +85,9 @@ public class Oponent extends Entity {
 		Player p = (Player) ((Game) getWorld()).getPlayer();
 
 		if (getx() < p.getx()) {
-			x -= 0.6;
+			x -= 3;
 		} else {
-			x += 0.6;
+			x += 3;
 		}
 	}
 
@@ -200,11 +199,16 @@ public class Oponent extends Entity {
 
 	public void update() {
 
-		// update position
-		getNextPosition();
-		checkTileMapCollision();
-		setPosition(xtemp, ytemp);
+		if (health <= 1)
+			death = true;
 
+		// update position
+		if(!death){
+			getNextPosition();
+			checkTileMapCollision();
+			setPosition(xtemp, ytemp);
+		}
+		
 		// check attack to stop
 		if (currentAction == ATTACKING) {
 			if (animation.hasPlayedOnce()) {
@@ -260,6 +264,7 @@ public class Oponent extends Entity {
 			}
 		}
 
-		AImovements();
+		if(!death)
+			AImovements();
 	}
 }
