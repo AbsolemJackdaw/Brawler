@@ -48,7 +48,7 @@ public class Game extends GameState {
 		//health1
 		g.drawImage(Images.hud.getSubimage(0, 50, 150, 50),0,0,150,50, null); //150 -- to decrease health
 		//health2
-		g.drawImage(Images.hud.getSubimage(0, 50, Math.max(op.health,0) , 50),320,0,Math.min(-op.health,0),50, null); //150 -- to decrease health
+		g.drawImage(Images.hud.getSubimage(0, 50, Math.max(op.health,1) , 50),320,0,Math.min(-op.health,1),50, null); //150 -- to decrease health
 		//health bar contour
 		g.drawImage(Images.hud.getSubimage(0, 0, 320, 50),0,0,320,50, null);
 		//shield
