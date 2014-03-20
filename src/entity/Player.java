@@ -139,8 +139,8 @@ public class Player extends Entity{
 
 	public void update() {
 
-		cwidth = 30;
-		cheight = 30;
+//		cwidth = 30;
+//		cheight = 30;
 		
 		// update position
 		getNextPosition();
@@ -155,8 +155,9 @@ public class Player extends Entity{
 		if (attacking && (currentAction != ATTACKING)) {
 			cwidth += 20;
 			if(this.intersects(((Game)getWorld()).getOponent())){
-				((Game)getWorld()).getOponent().damageEntity(1);
+				((Game)getWorld()).getOponent().damageEntity(10);
 			}
+			cwidth -=20;
 		}
 			
 		// set animation

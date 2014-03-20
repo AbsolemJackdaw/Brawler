@@ -1,6 +1,7 @@
 package gamestate;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import content.Background;
 import content.Images;
@@ -37,12 +38,12 @@ public class Game extends GameState {
 		p.draw(g);
 		op.draw(g);
 		
-//		Rectangle rect = p.getRectangle();
-//		g.draw(rect);
-//		
-//		Rectangle rect2 = new Rectangle((int) p.getx()-(p.getWidth()/2) , (int) p.gety()-(p.getHeight()/2), p.getWidth(),
-//				p.getHeight());
-//		g.draw(rect2);
+		Rectangle rect = p.getRectangle();
+		g.draw(rect);
+		
+		Rectangle rect2 = new Rectangle((int) p.getx()-(p.getWidth()/2) , (int) p.gety()-(p.getHeight()/2), p.getWidth(),
+				p.getHeight());
+		g.draw(rect2);
 		
 		//health1
 		g.drawImage(Images.hud.getSubimage(0, 50, 150, 50),0,0,150,50, null); //150 -- to decrease health
