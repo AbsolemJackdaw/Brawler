@@ -1,5 +1,7 @@
 package entity;
 
+import gamestate.GameState;
+
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -61,6 +63,8 @@ public class Entity {
 
 	public int health;
 	public int maxHealth;
+
+	public GameState world;
 
 	// constructor
 	public Entity() {
@@ -204,6 +208,10 @@ public class Entity {
 		return width;
 	}
 
+	public GameState getWorld() {
+		return world;
+	}
+
 	public int getx() {
 		return (int) x;
 	}
@@ -222,14 +230,14 @@ public class Entity {
 		down = b;
 	}
 
-	public void setJumping(boolean b) {
-		jumping = b;
-	}
-
 	// public void setMapPosition() {
 	// x = tileMap.getx();
 	// y = tileMap.gety();
 	// }
+
+	public void setJumping(boolean b) {
+		jumping = b;
+	}
 
 	public void setLeft(boolean b) {
 		left = b;
@@ -251,5 +259,9 @@ public class Entity {
 	public void setVector(double dx, double dy) {
 		this.dx = dx;
 		this.dy = dy;
+	}
+
+	public void setWorld(GameState world) {
+		this.world = world;
 	}
 }

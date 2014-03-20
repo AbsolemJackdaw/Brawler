@@ -33,11 +33,11 @@ public class Game extends GameState {
 		p.setPosition(50, 50);
 		p.setWorld(this);
 		p.setPlayerSkin(character);
-		
+
 		op = new Oponent();
 		op.setPosition(100, 75);
 		op.setOpponentSkin(character);
-		
+		op.setWorld(this);
 		setPlayerPosition();
 	}
 
@@ -55,15 +55,12 @@ public class Game extends GameState {
 		g.draw(rect2);
 
 		// health1
-		g.drawImage(Images.hud.getSubimage(0, 50, 150, 50), 0, 0, 150, 50, null); // 150
-																					// --
-																					// to
-																					// decrease
-																					// health
+		g.drawImage(Images.hud.getSubimage(0, 50, Math.max(p.health, 1), 50), 
+				0, 0, Math.max(p.health, 1), 50, null);
+
 		// health2
 		g.drawImage(Images.hud.getSubimage(0, 50, Math.max(op.health, 1), 50),
-				320, 0, Math.min(-op.health, 1), 50, null); // 150 -- to
-															// decrease health
+				320, 0, Math.min(-op.health, 1), 50, null); 
 		// health bar contour
 		g.drawImage(Images.hud.getSubimage(0, 0, 320, 50), 0, 0, 320, 50, null);
 		// shield
@@ -84,6 +81,10 @@ public class Game extends GameState {
 
 	public Entity getOponent() {
 		return op;
+	}
+
+	public Entity getPlayer() {
+		return p;
 	}
 
 	public void handleInput() {
@@ -121,10 +122,22 @@ public class Game extends GameState {
 		if (op.health <= 1) {
 			countdown = true;
 			endResult = "Player1 Wins !";
-		} else {
+			freeze();
+		}else if(p.health <= 1){
+			countdown = true;
+			endResult = "You Lost !";
+			freeze();
+		}
+		else {
 			countdown = false;
 			endResult = "";
 		}
 	}
-
+	
+	private void freeze(){
+		p.setLeft(false);
+		p.setRight(false);
+		op.setLeft(false);
+		op.setRight(false);
+	}
 }

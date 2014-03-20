@@ -1,7 +1,6 @@
 package entity;
 
 import gamestate.Game;
-import gamestate.GameState;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -16,11 +15,9 @@ public class Player extends Entity {
 	// private int maxHealth;
 
 	private boolean attacking;
-	private int attackDamage;
+	// private int attackDamage;
 
-	private boolean dead = false;
-
-	GameState world;
+	// private boolean dead = false;
 
 	// animations
 	private ArrayList<BufferedImage[]> sprites;
@@ -55,7 +52,7 @@ public class Player extends Entity {
 
 		facingRight = true;
 
-		maxHealth = 20;
+		maxHealth = 150;
 		health = maxHealth;
 
 	}
@@ -116,10 +113,6 @@ public class Player extends Entity {
 
 	}
 
-	public GameState getWorld() {
-		return world;
-	}
-
 	public void setAttacking() {
 		attacking = true;
 	}
@@ -156,10 +149,6 @@ public class Player extends Entity {
 		currentAction = IDLE;
 		animation.setFrames(sprites.get(IDLE));
 		animation.setDelay(100);
-	}
-
-	public void setWorld(GameState world) {
-		this.world = world;
 	}
 
 	public void update() {

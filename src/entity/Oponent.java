@@ -1,9 +1,14 @@
 package entity;
 
+import gamestate.Game;
+
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
+
+import trivia.Print;
 
 import content.Animation;
 
@@ -35,7 +40,7 @@ public class Oponent extends Entity {
 		cheight = 20;
 
 		moveSpeed = 0.3; // inital walking speed. you speed up as you walk
-		maxSpeed = 2.0; // change to jump farther and walk faster
+		maxSpeed = 0.3; // change to jump farther and walk faster
 		stopSpeed = 1.0;
 		fallSpeed = 0.15; // affects falling and jumping
 		maxFallSpeed = 5.0;
@@ -46,43 +51,63 @@ public class Oponent extends Entity {
 
 		maxHealth = 150;
 		health = maxHealth;
-		
+
 	}
 
-	
-	public void setOpponentSkin(int character) {
+	private void AImovements() {
+		Random rand = new Random();
 
-		String s;
+		int i = rand.nextInt(100);
 
-		s = character == 0 ? "/Characters/testChar.png"
-				: "/Characters/testChar2.png";
 
-		// load sprites
-		try {
+//		if(i < 20){
+//			backOff();
+//			backOff();
+//			backOff();
+//		}
+		 if (i > 90)
+			attack();
 
-			final BufferedImage spritesheet = ImageIO.read(getClass()
-					.getResourceAsStream(s));
+		else{
+			followPlayer();
 
-			sprites = new ArrayList<BufferedImage[]>();
-			for (int i = 0; i < numFrames.length; i++) {
-
-				final BufferedImage[] bi = new BufferedImage[numFrames[i]];
-
-				for (int j = 0; j < numFrames[i]; j++) {
-					bi[j] = spritesheet.getSubimage(j * width, i * height,
-							width, height);
-				}
-				sprites.add(bi);
-			}
-		} catch (final Exception e) {
-			e.printStackTrace();
 		}
-
-		animation = new Animation();
-		currentAction = IDLE;
-		animation.setFrames(sprites.get(IDLE));
-		animation.setDelay(100);
 	}
+
+	private void attack() {
+		cwidth += 20;
+		if (this.intersects(((Game) getWorld()).getPlayer())) {
+			((Game) getWorld()).getPlayer().damageEntity(10);
+		}
+		cwidth -= 20;
+	}
+
+	private void backOff() {
+		Player p = (Player) ((Game) getWorld()).getPlayer();
+
+		if (getx() < p.getx()) {
+			x -= 0.6;
+		} else {
+			x += 0.6;
+		}
+	}
+
+	private void followPlayer() {
+		Player p = (Player) ((Game) getWorld()).getPlayer();
+
+		Print.say(xtemp + " " + p.xtemp);
+		if (getx() < p.getx()) {
+			//			x += 0.3;
+			setLeft(false);
+			setRight(true);
+
+		} else {
+			//			x -= 0.3;
+			setRight(false);
+			setLeft(true);
+		}
+	}
+
 	@Override
 	public void getNextPosition() {
 
@@ -137,6 +162,40 @@ public class Oponent extends Entity {
 
 		}
 
+	}
+
+	public void setOpponentSkin(int character) {
+
+		String s;
+
+		s = character == 0 ? "/Characters/testChar.png"
+				: "/Characters/testChar2.png";
+
+		// load sprites
+		try {
+
+			final BufferedImage spritesheet = ImageIO.read(getClass()
+					.getResourceAsStream(s));
+
+			sprites = new ArrayList<BufferedImage[]>();
+			for (int i = 0; i < numFrames.length; i++) {
+
+				final BufferedImage[] bi = new BufferedImage[numFrames[i]];
+
+				for (int j = 0; j < numFrames[i]; j++) {
+					bi[j] = spritesheet.getSubimage(j * width, i * height,
+							width, height);
+				}
+				sprites.add(bi);
+			}
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+
+		animation = new Animation();
+		currentAction = IDLE;
+		animation.setFrames(sprites.get(IDLE));
+		animation.setDelay(100);
 	}
 
 	public void update() {
@@ -200,6 +259,7 @@ public class Oponent extends Entity {
 				facingRight = false;
 			}
 		}
-	}
 
+		AImovements();
+	}
 }
