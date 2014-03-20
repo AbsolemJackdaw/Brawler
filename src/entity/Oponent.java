@@ -1,14 +1,10 @@
 package entity;
 
-import gamestate.Game;
-
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
-
-import trivia.Print;
 
 import content.Animation;
 
@@ -29,6 +25,12 @@ public class Oponent extends Entity {
 	private static final int JUMPING = 2;
 	private static final int FALLING = 3;
 	private static final int ATTACKING = 4;
+
+	int aiCntdwn = 100;
+
+	Random rand = new Random();
+
+	public boolean follows;
 
 	public Oponent() {
 		super();
@@ -54,35 +56,35 @@ public class Oponent extends Entity {
 	}
 
 	private void AImovements() {
-		Random rand = new Random();
-
-		int i = rand.nextInt(100);
-
-
-		if(i < 1){
-			backOff();
-			backOff();
-			backOff();
+		int i = rand.nextInt(10);
+		cwidth += 30;
+		if (this.intersects(getWorld().getPlayer())) {
+			follows = false;
+			if (i < ((getWorld().getDiff() * 2) + 1)) {
+				cwidth = 30;
+				attack();
+			}
+			if (i == 9) {
+				backOff();
+				backOff();
+			}
+		} else {
+			follows = true;
 		}
-		if (i > 95)
-			attack();
-
-		else{
-			followPlayer();
-
-		}
+		cwidth = 30;
 	}
 
 	private void attack() {
 		cwidth += 20;
-		if (this.intersects(((Game) getWorld()).getPlayer())) {
-			((Game) getWorld()).getPlayer().damageEntity(10);
+		if (this.intersects(getWorld().getPlayer())) {
+			attacking = true;
+			getWorld().getPlayer().damageEntity(10);
 		}
 		cwidth -= 20;
 	}
 
-	private void backOff() {
-		Player p = (Player) ((Game) getWorld()).getPlayer();
+	public void backOff() {
+		Player p = getWorld().getPlayer();
 
 		if (getx() < p.getx()) {
 			x -= 3;
@@ -92,16 +94,13 @@ public class Oponent extends Entity {
 	}
 
 	private void followPlayer() {
-		Player p = (Player) ((Game) getWorld()).getPlayer();
+		Player p = getWorld().getPlayer();
 
-		Print.say(xtemp + " " + p.xtemp);
+		// Print.say(xtemp + " " + p.xtemp);
 		if (getx() < p.getx()) {
-			//			x += 0.3;
 			setLeft(false);
 			setRight(true);
-
 		} else {
-			//			x -= 0.3;
 			setRight(false);
 			setLeft(true);
 		}
@@ -111,12 +110,12 @@ public class Oponent extends Entity {
 	public void getNextPosition() {
 
 		// movement
-		if (left) {
+		if (left && (x > 25)) {
 			dx -= moveSpeed;
 			if (dx < -maxSpeed) {
 				dx = -maxSpeed;
 			}
-		} else if (right) {
+		} else if (right && (x < 295)) {
 			dx += moveSpeed;
 			if (dx > maxSpeed) {
 				dx = maxSpeed;
@@ -167,8 +166,8 @@ public class Oponent extends Entity {
 
 		String s;
 
-		s = character == 0 ? "/Characters/testChar.png"
-				: "/Characters/testChar2.png";
+		s = character == 0 ? "/Characters/TestChar.png"
+				: "/Characters/TestChar2.png";
 
 		// load sprites
 		try {
@@ -199,16 +198,17 @@ public class Oponent extends Entity {
 
 	public void update() {
 
-		if (health <= 1)
+		if (health <= 1) {
 			death = true;
+		}
 
 		// update position
-		if(!death){
+		if (!death) {
 			getNextPosition();
 			checkTileMapCollision();
 			setPosition(xtemp, ytemp);
 		}
-		
+
 		// check attack to stop
 		if (currentAction == ATTACKING) {
 			if (animation.hasPlayedOnce()) {
@@ -264,7 +264,15 @@ public class Oponent extends Entity {
 			}
 		}
 
-		if(!death)
-			AImovements();
+		if (!death) {
+			aiCntdwn--;
+			if (aiCntdwn <= 0) {
+				AImovements();
+				aiCntdwn = 40;
+			}
+		}
+		if (follows) {
+			followPlayer();
+		}
 	}
 }

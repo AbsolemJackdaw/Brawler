@@ -1,6 +1,6 @@
 package entity;
 
-import gamestate.GameState;
+import gamestate.Game;
 
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -49,7 +49,7 @@ public class Entity {
 	protected boolean falling;
 
 	// movement attributes
-	protected double moveSpeed;
+	public double moveSpeed;
 	protected double maxSpeed;
 	protected double stopSpeed;
 	protected double fallSpeed;
@@ -64,32 +64,14 @@ public class Entity {
 	public int health;
 
 	public boolean death;
-	
-	public GameState world;
+
+	public Game world;
 
 	// constructor
 	public Entity() {
 		health = 150;
 	}
 
-	public void calculateCorners(double x, double y) {
-
-		// final int leftTile = (int) (x - (cwidth / 2)) / tileSize;
-		// final int rightTile = (int) ((x + (cwidth / 2)) - 1) / tileSize;
-		// final int topTile = (int) (y - (cheight / 2)) / tileSize;
-		// final int bottomTile = (int) ((y + (cheight / 2)) - 1) / tileSize;
-		//
-		// // final int tl = tileMap.getType(topTile, leftTile);
-		// // final int tr = tileMap.getType(topTile, rightTile);
-		// // final int bl = tileMap.getType(bottomTile, leftTile);
-		// // final int br = tileMap.getType(bottomTile, rightTile);
-		//
-		// topLeft = tl == Tile.BLOCKED;
-		// topRight = tr == Tile.BLOCKED;
-		// bottomLeft = bl == Tile.BLOCKED;
-		// bottomRight = br == Tile.BLOCKED;
-
-	}
 
 	public void checkTileMapCollision() {
 
@@ -151,9 +133,7 @@ public class Entity {
 	private void drawSprite(Graphics2D g, Animation am) {
 
 		if (showBox) {
-			// Rectangle r = getRectangle();
-			// g.setColor(Color.WHITE);
-			// g.draw(r);
+
 		}
 
 		// draw
@@ -208,7 +188,7 @@ public class Entity {
 		return width;
 	}
 
-	public GameState getWorld() {
+	public Game getWorld() {
 		return world;
 	}
 
@@ -230,10 +210,6 @@ public class Entity {
 		down = b;
 	}
 
-	// public void setMapPosition() {
-	// x = tileMap.getx();
-	// y = tileMap.gety();
-	// }
 
 	public void setJumping(boolean b) {
 		jumping = b;
@@ -261,7 +237,7 @@ public class Entity {
 		this.dy = dy;
 	}
 
-	public void setWorld(GameState world) {
+	public void setWorld(Game world) {
 		this.world = world;
 	}
 }

@@ -8,7 +8,6 @@ import java.awt.Rectangle;
 import content.Background;
 import content.Images;
 import content.KeyHandler;
-import entity.Entity;
 import entity.Oponent;
 import entity.Player;
 
@@ -22,6 +21,8 @@ public class Game extends GameState {
 	private boolean countdown = false;
 
 	private String endResult = "";
+
+	private int difficulty = 0;
 
 	public Game(GameStateManager gameStateManager, int character) {
 		this.gsm = gameStateManager;
@@ -55,12 +56,12 @@ public class Game extends GameState {
 		g.draw(rect2);
 
 		// health1
-		g.drawImage(Images.hud.getSubimage(0, 50, Math.max(p.health, 1), 50), 
+		g.drawImage(Images.hud.getSubimage(0, 50, Math.max(p.health, 1), 50),
 				0, 0, Math.max(p.health, 1), 50, null);
 
 		// health2
 		g.drawImage(Images.hud.getSubimage(0, 50, Math.max(op.health, 1), 50),
-				320, 0, Math.min(-op.health, 1), 50, null); 
+				320, 0, Math.min(-op.health, 1), 50, null);
 		// health bar contour
 		g.drawImage(Images.hud.getSubimage(0, 0, 320, 50), 0, 0, 320, 50, null);
 		// shield
@@ -77,13 +78,30 @@ public class Game extends GameState {
 		g.drawString(endResult, xc, yx);
 
 		g.setColor(Color.BLACK);
+		g.setFont(new Font("Maximilien", Font.PLAIN, 15));
+
+		g.drawString(getDiff() == 0 ? "Easy" : getDiff() == 1 ? "Normal"
+				: "Hard", 143, 28);
+
 	}
 
-	public Entity getOponent() {
+	private void freeze() {
+		p.setLeft(false);
+		p.setRight(false);
+
+		op.setLeft(false);
+		op.setRight(false);
+	}
+
+	public int getDiff() {
+		return difficulty;
+	}
+
+	public Oponent getOponent() {
 		return op;
 	}
 
-	public Entity getPlayer() {
+	public Player getPlayer() {
 		return p;
 	}
 
@@ -103,11 +121,19 @@ public class Game extends GameState {
 			p.setAttacking();
 		}
 
+		if (KeyHandler.isPressed(KeyHandler.D)) {
+			setDiff(getDiff() < 2 ? getDiff() + 1 : 0);
+			op.moveSpeed = getDiff() < 2 ? op.moveSpeed += 0.15 : 0.3;
+		}
 	}
 
 	@Override
 	public void init() {
 
+	}
+
+	private void setDiff(int i) {
+		difficulty = i;
 	}
 
 	private void setPlayerPosition() {
@@ -123,22 +149,13 @@ public class Game extends GameState {
 			countdown = true;
 			endResult = "Player1 Wins !";
 			freeze();
-		}else if(p.health <= 1){
+		} else if (p.health <= 1) {
 			countdown = true;
 			endResult = "You Lost !";
 			freeze();
-		}
-		else {
+		} else {
 			countdown = false;
 			endResult = "";
 		}
-	}
-	
-	private void freeze(){
-		p.setLeft(false);
-		p.setRight(false);
-		
-		op.setLeft(false);
-		op.setRight(false);
 	}
 }

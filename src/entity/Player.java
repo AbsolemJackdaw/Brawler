@@ -1,7 +1,5 @@
 package entity;
 
-import gamestate.Game;
-
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -120,8 +118,8 @@ public class Player extends Entity {
 
 		String s;
 
-		s = character == 1 ? "/Characters/testChar.png"
-				: "/Characters/testChar2.png";
+		s = character == 1 ? "/Characters/TestChar.png"
+				: "/Characters/TestChar2.png";
 
 		// load sprites
 		try {
@@ -169,8 +167,13 @@ public class Player extends Entity {
 
 		if (attacking && (currentAction != ATTACKING)) {
 			cwidth += 20;
-			if (this.intersects(((Game) getWorld()).getOponent())) {
-				((Game) getWorld()).getOponent().damageEntity(10);
+			if (this.intersects(getWorld().getOponent())) {
+				getWorld().getOponent().damageEntity(10);
+
+				for (int i = 0; i < 5; i++) {
+					getWorld().getOponent().backOff();
+				}
+
 			}
 			cwidth -= 20;
 		}
