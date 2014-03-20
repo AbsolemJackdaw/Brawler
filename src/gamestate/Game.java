@@ -47,7 +47,7 @@ public class Game extends GameState {
 		//health1
 		g.drawImage(Images.hud.getSubimage(0, 50, 150, 50),0,0,150,50, null); //150 -- to decrease health
 		//health2
-		g.drawImage(Images.hud.getSubimage(0, 50, 150, 50),320,0,-150,50, null); //150 -- to decrease health
+		g.drawImage(Images.hud.getSubimage(0, 50, op.health , 50),320,0,-op.health,50, null); //150 -- to decrease health
 		//health bar contour
 		g.drawImage(Images.hud.getSubimage(0, 0, 320, 50),0,0,320,50, null);
 		//shield
@@ -79,8 +79,8 @@ public class Game extends GameState {
 		p.setLeft(KeyHandler.keyState[KeyHandler.LEFT]);
 		p.setRight(KeyHandler.keyState[KeyHandler.RIGHT]);
 		p.setJumping(KeyHandler.keyState[KeyHandler.UP]);
-//		if (KeyHandler.isPressed(KeyHandler.SPACE))
-//			p.setAttacking();
+		if (KeyHandler.isPressed(KeyHandler.SPACE))
+			p.setAttacking();
 
 	}
 

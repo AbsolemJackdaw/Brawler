@@ -10,13 +10,8 @@ import content.Animation;
 public class Oponent extends Entity{
 
 
-//	private int health;
-	private int maxHealth;
 
 	private boolean attacking;
-//	private int attackDamage;
-
-//	private boolean dead = false;
 
 
 	// animations
@@ -52,8 +47,8 @@ public class Oponent extends Entity{
 
 		facingRight = true;
 
-		maxHealth = 20;
-//		health = maxHealth;
+		maxHealth = 150;
+		health = maxHealth;
 
 
 		// load sprites

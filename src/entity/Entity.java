@@ -65,8 +65,8 @@ public class Entity {
 	
 	// constructor
 	public Entity() {
-		health =40;
-		maxHealth=40;
+		health = 150;
+		maxHealth= 150;
 	}
 
 	public void calculateCorners(double x, double y) {
