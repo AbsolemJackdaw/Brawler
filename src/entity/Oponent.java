@@ -7,19 +7,16 @@ import javax.imageio.ImageIO;
 
 import content.Animation;
 
-public class Oponent extends Entity{
-
-
+public class Oponent extends Entity {
 
 	private boolean attacking;
-
 
 	// animations
 	private ArrayList<BufferedImage[]> sprites;
 	private final int[] numFrames = {
 			// for every animation, add the number of frames here
 			// sample : 2,5,8,4 (2 for idle 0, 5 for walking 1, etc.
-			2 ,2 ,2 ,2 ,2 };
+			2, 2, 2, 2, 2 };
 
 	// animation action
 	private static final int IDLE = 0;
@@ -50,7 +47,6 @@ public class Oponent extends Entity{
 		maxHealth = 150;
 		health = maxHealth;
 
-
 		// load sprites
 		try {
 
@@ -62,9 +58,10 @@ public class Oponent extends Entity{
 
 				final BufferedImage[] bi = new BufferedImage[numFrames[i]];
 
-				for (int j = 0; j < numFrames[i]; j++)
+				for (int j = 0; j < numFrames[i]; j++) {
 					bi[j] = spritesheet.getSubimage(j * width, i * height,
 							width, height);
+				}
 				sprites.add(bi);
 			}
 		} catch (final Exception e) {
@@ -78,32 +75,36 @@ public class Oponent extends Entity{
 
 	}
 
-
 	@Override
 	public void getNextPosition() {
 
 		// movement
 		if (left) {
 			dx -= moveSpeed;
-			if (dx < -maxSpeed)
+			if (dx < -maxSpeed) {
 				dx = -maxSpeed;
+			}
 		} else if (right) {
 			dx += moveSpeed;
-			if (dx > maxSpeed)
+			if (dx > maxSpeed) {
 				dx = maxSpeed;
+			}
 		} else if (dx > 0) {
 			dx -= stopSpeed;
-			if (dx < 0)
+			if (dx < 0) {
 				dx = 0;
+			}
 		} else if (dx < 0) {
 			dx += stopSpeed;
-			if (dx > 0)
+			if (dx > 0) {
 				dx = 0;
+			}
 		}
 
 		// cannot move while attacking, except in air
-		if ((currentAction == ATTACKING) && !(jumping || falling))
+		if ((currentAction == ATTACKING) && !(jumping || falling)) {
 			dx = 0;
+		}
 
 		// jumping
 		if (jumping && !falling) {
@@ -115,19 +116,20 @@ public class Oponent extends Entity{
 		if (falling) {
 			dy += fallSpeed;
 
-			if (dy > 0)
+			if (dy > 0) {
 				jumping = false;
-			if ((dy < 0) && !jumping)
+			}
+			if ((dy < 0) && !jumping) {
 				dy += stopJumpSpeed;
+			}
 
-			if (dy > maxFallSpeed)
+			if (dy > maxFallSpeed) {
 				dy = maxFallSpeed;
+			}
 
 		}
 
 	}
-
-
 
 	public void update() {
 
@@ -137,11 +139,11 @@ public class Oponent extends Entity{
 		setPosition(xtemp, ytemp);
 
 		// check attack to stop
-		if (currentAction == ATTACKING)
-			if (animation.hasPlayedOnce())
+		if (currentAction == ATTACKING) {
+			if (animation.hasPlayedOnce()) {
 				attacking = false;
-
-
+			}
+		}
 
 		// set animation
 		if (attacking) {
@@ -183,12 +185,13 @@ public class Oponent extends Entity{
 
 		// set direction
 		if (currentAction != ATTACKING) {
-			if (right)
+			if (right) {
 				facingRight = true;
-			if (left)
+			}
+			if (left) {
 				facingRight = false;
+			}
 		}
 	}
-
 
 }

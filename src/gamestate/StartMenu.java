@@ -22,8 +22,8 @@ public class StartMenu extends GameState {
 
 	private Font maximilien;
 
-	int image=0;
-	
+	int image = 0;
+
 	public StartMenu(GameStateManager gsm) {
 		this.gsm = gsm;
 
@@ -55,11 +55,11 @@ public class StartMenu extends GameState {
 
 		g.setColor(titleColor);
 		g.drawString("Brawler Game", 75, 30);
-		
+
 		g.drawImage(Images.Button1, 95, 90, null);
 		g.drawImage(Images.Button1, 95, 130, null);
 		g.drawImage(Images.Button1, 95, 165, null);
-		
+
 		final Color clr = new Color(0.5f, 0f, 0.1f);
 		// Draw menu square
 		final Rectangle rect = new Rectangle((GamePanel.WIDTH / 2) - 20,
@@ -67,8 +67,6 @@ public class StartMenu extends GameState {
 
 		g.setColor(clr);
 		g.draw(rect);
-
-		
 
 		// draw menu options
 		g.setFont(maximilien);
