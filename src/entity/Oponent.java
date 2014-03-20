@@ -46,12 +46,22 @@ public class Oponent extends Entity {
 
 		maxHealth = 150;
 		health = maxHealth;
+		
+	}
+
+	
+	public void setOpponentSkin(int character) {
+
+		String s;
+
+		s = character == 0 ? "/Characters/testChar.png"
+				: "/Characters/testChar2.png";
 
 		// load sprites
 		try {
 
 			final BufferedImage spritesheet = ImageIO.read(getClass()
-					.getResourceAsStream("/Characters/testChar.png"));
+					.getResourceAsStream(s));
 
 			sprites = new ArrayList<BufferedImage[]>();
 			for (int i = 0; i < numFrames.length; i++) {
@@ -72,9 +82,7 @@ public class Oponent extends Entity {
 		currentAction = IDLE;
 		animation.setFrames(sprites.get(IDLE));
 		animation.setDelay(100);
-
 	}
-
 	@Override
 	public void getNextPosition() {
 

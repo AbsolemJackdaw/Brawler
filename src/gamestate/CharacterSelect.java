@@ -112,14 +112,16 @@ public class CharacterSelect extends GameState {
 
 	private void select() {
 		if (currentChoice == 0) {
-			gsm.setState(GameStateManager.GAME);
 			gsm.setCharacter(GameStateManager.HEART);
 			Print.say("Choosing heart");
+			gsm.setState(GameStateManager.GAME);
+
 		}
 		if (currentChoice == 1) {
-			gsm.setState(GameStateManager.GAME);
 			gsm.setCharacter(GameStateManager.BRAIN);
 			Print.say("Choosing Brain");
+			gsm.setState(GameStateManager.GAME);
+
 		}
 		// if (currentChoice == 2) {
 		// System.exit(0);

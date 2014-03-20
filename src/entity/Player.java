@@ -128,14 +128,14 @@ public class Player extends Entity {
 
 		String s;
 
-		s = character == 0 ? "/Characters/testChar.png"
+		s = character == 1 ? "/Characters/testChar.png"
 				: "/Characters/testChar2.png";
 
 		// load sprites
 		try {
 
 			final BufferedImage spritesheet = ImageIO.read(getClass()
-					.getResourceAsStream("/Characters/testChar.png"));
+					.getResourceAsStream(s));
 
 			sprites = new ArrayList<BufferedImage[]>();
 			for (int i = 0; i < numFrames.length; i++) {

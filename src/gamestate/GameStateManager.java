@@ -64,7 +64,7 @@ public class GameStateManager {
 		} else if (state == CHARACTERSELECT) {
 			gameStates[state] = new CharacterSelect(this);
 		} else if (state == GAME) {
-			gameStates[state] = new Game(this);
+			gameStates[state] = new Game(this, character);
 		}
 	}
 

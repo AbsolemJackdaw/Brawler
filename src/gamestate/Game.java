@@ -23,7 +23,7 @@ public class Game extends GameState {
 
 	private String endResult = "";
 
-	public Game(GameStateManager gameStateManager) {
+	public Game(GameStateManager gameStateManager, int character) {
 		this.gsm = gameStateManager;
 		bg = new Background("/Background/PlainBG.png", 1, false, 0);
 
@@ -32,10 +32,12 @@ public class Game extends GameState {
 		p = new Player();
 		p.setPosition(50, 50);
 		p.setWorld(this);
-
+		p.setPlayerSkin(character);
+		
 		op = new Oponent();
 		op.setPosition(100, 75);
-
+		op.setOpponentSkin(character);
+		
 		setPlayerPosition();
 	}
 
