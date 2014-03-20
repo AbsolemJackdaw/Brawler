@@ -18,8 +18,6 @@ public class Game extends GameState {
 
 	private Font maximilien;
 
-	private boolean countdown = false;
-
 	private String endResult = "";
 
 	private int difficulty = 0;
@@ -39,7 +37,6 @@ public class Game extends GameState {
 		op.setPosition(100, 75);
 		op.setOpponentSkin(character);
 		op.setWorld(this);
-		setPlayerPosition();
 	}
 
 	@Override
@@ -106,7 +103,7 @@ public class Game extends GameState {
 	}
 
 	public void handleInput() {
-		// if(KeyHandler.isPressed(KeyHandler.ESCAPE)) gsm.setPaused(true);
+
 		if ((p.health <= 1) || (op.health <= 1) || (endResult.length() > 1)) {
 			if (KeyHandler.isPressed(KeyHandler.ENTER)) {
 				gsm.setState(GameStateManager.STARTMENU);
@@ -123,7 +120,8 @@ public class Game extends GameState {
 
 		if (KeyHandler.isPressed(KeyHandler.D)) {
 			setDiff(getDiff() < 2 ? getDiff() + 1 : 0);
-			op.moveSpeed = getDiff() < 2 ? op.moveSpeed += 0.15 : 0.3;
+			op.maxSpeed = 0.3;
+			op.maxSpeed = 0.3 + (0.1*getDiff());
 		}
 	}
 
@@ -136,8 +134,6 @@ public class Game extends GameState {
 		difficulty = i;
 	}
 
-	private void setPlayerPosition() {
-	}
 
 	@Override
 	public void update() {
@@ -146,15 +142,12 @@ public class Game extends GameState {
 		op.update();
 
 		if (op.health <= 1) {
-			countdown = true;
 			endResult = "Player1 Wins !";
 			freeze();
 		} else if (p.health <= 1) {
-			countdown = true;
 			endResult = "You Lost !";
 			freeze();
 		} else {
-			countdown = false;
 			endResult = "";
 		}
 	}

@@ -50,7 +50,7 @@ public class Entity {
 
 	// movement attributes
 	public double moveSpeed;
-	protected double maxSpeed;
+	public double maxSpeed;
 	protected double stopSpeed;
 	protected double fallSpeed;
 	protected double maxFallSpeed;
@@ -239,5 +239,15 @@ public class Entity {
 
 	public void setWorld(Game world) {
 		this.world = world;
+	}
+	
+	
+	public void backOff(Entity other) {
+		
+		if (other.getx() > getx()) {
+			x -= 3;
+		} else {
+			x += 3;
+		}
 	}
 }

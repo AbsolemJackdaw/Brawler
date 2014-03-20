@@ -148,6 +148,7 @@ public class Player extends Entity {
 		animation.setDelay(100);
 	}
 
+	
 	public void update() {
 
 		// cwidth = 30;
@@ -170,8 +171,8 @@ public class Player extends Entity {
 			if (this.intersects(getWorld().getOponent())) {
 				getWorld().getOponent().damageEntity(10);
 
-				for (int i = 0; i < 5; i++) {
-					getWorld().getOponent().backOff();
+				for (int i = 0; i < 8; i++) {
+					getWorld().getOponent().backOff(this);
 				}
 
 			}

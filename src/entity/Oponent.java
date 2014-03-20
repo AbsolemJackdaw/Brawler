@@ -65,8 +65,8 @@ public class Oponent extends Entity {
 				attack();
 			}
 			if (i == 9) {
-				backOff();
-				backOff();
+				backOff(this);
+				backOff(this);
 			}
 		} else {
 			follows = true;
@@ -79,18 +79,9 @@ public class Oponent extends Entity {
 		if (this.intersects(getWorld().getPlayer())) {
 			attacking = true;
 			getWorld().getPlayer().damageEntity(10);
+			getWorld().getPlayer().backOff(this);
 		}
 		cwidth -= 20;
-	}
-
-	public void backOff() {
-		Player p = getWorld().getPlayer();
-
-		if (getx() < p.getx()) {
-			x -= 3;
-		} else {
-			x += 3;
-		}
 	}
 
 	private void followPlayer() {
