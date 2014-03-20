@@ -1,5 +1,7 @@
 package gamestate;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -15,9 +17,15 @@ public class Game extends GameState {
 	Player p;
 	Oponent op;
 	
+	private Font maximilien;
+
+	
 	public Game(GameStateManager gameStateManager, int character) {
 		this.gsm = gameStateManager;
 		bg = new Background("/Background/PlainBG.png", 1, false, 0);
+		
+		maximilien = new Font("Maximilien", Font.PLAIN, 28);
+
 		
 		p = new Player();
 		p.setPosition(50, 50);
@@ -54,7 +62,16 @@ public class Game extends GameState {
 		//shield
 		g.drawImage(Images.hud.getSubimage(50, 100, 50, 50),(320/2)-25,0,50,50, null);
 
+		int xc = 70;
+		int yx = 95;
 
+		g.setFont(maximilien);
+		g.setColor(Color.BLACK);
+		g.drawString(endResult, xc+2, yx+2);
+		g.setColor(Color.ORANGE);
+		g.drawString(endResult, xc, yx);
+		
+		g.setColor(Color.BLACK);
 	}
 
 	@Override
@@ -62,11 +79,25 @@ public class Game extends GameState {
 
 	}
 
+	private boolean countdown = false;
+	private String endResult = "";
+	
 	@Override
 	public void update() {
 		p.update();
 		handleInput();
 		op.update();
+		
+		
+		
+		if(op.health <= 1){
+			countdown = true;
+			endResult = "Player1 Wins !";
+		}
+		else{
+			countdown = false;
+			endResult = "";
+		}
 	}
 	
 	public Entity getOponent(){
@@ -75,8 +106,11 @@ public class Game extends GameState {
 	
 	public void handleInput() {
 		// if(KeyHandler.isPressed(KeyHandler.ESCAPE)) gsm.setPaused(true);
-//		if (p.getHealth() == 0)
-//			return;
+		if (p.health <= 1 || op.health <= 1 || endResult.length() > 1){
+			if (KeyHandler.isPressed(KeyHandler.ENTER))
+				gsm.setState(GameStateManager.STARTMENU);
+				return;
+		}
 		p.setLeft(KeyHandler.keyState[KeyHandler.LEFT]);
 		p.setRight(KeyHandler.keyState[KeyHandler.RIGHT]);
 		p.setJumping(KeyHandler.keyState[KeyHandler.UP]);

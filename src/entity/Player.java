@@ -12,8 +12,8 @@ import content.Animation;
 
 public class Player extends Entity{
 
-	private int health;
-	private int maxHealth;
+//	private int health;
+//	private int maxHealth;
 
 	private boolean attacking;
 	private int attackDamage;
